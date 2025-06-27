@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1750988614 source:c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\main.c
+	<stdio.h>
+	"funcionarios.h"
+	"veiculos.h"
+	"locacoes.h"
+
+1750988492 source:c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\funcionarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcionarios.h"
+
+1750988614 c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\funcionarios.h
+
+1750988492 source:c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\veiculos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"veiculos.h"
+	"funcionarios.h"
+
+1750988614 c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\veiculos.h
+
+1750988492 source:c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\locacoes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"locacoes.h"
+	"funcionarios.h"
+	"veiculos.h"
+
+1750988642 c:\users\anafl\onedrive\documentos\gestaoveiculos\gestaoveiculos\locacoes.h
+
