@@ -22,7 +22,7 @@ void carregarLocacoes() {
 void salvarLocacoes() {
     FILE *file = fopen("locacoes.dat", "wb");
     if (file == NULL) {
-        printf("Erro ao salvar locações!\n");
+        printf("erro!nao eh possivel salvar\n");
         return;
     }
     fwrite(&totalLocacoes, sizeof(int), 1, file);
@@ -32,52 +32,46 @@ void salvarLocacoes() {
 
 void criarLocacao() {
     if (totalLocacoes >= MAX_LOCACOES) {
-        printf("Limite de locações atingido!\n");
+        printf("voce atingiu o limite de locacoes!\n");
         return;
     }
     
     Locacao nova;
-    printf("\n--- Criar Nova Locação ---\n");
+    printf("\ncriar uma nova locacao\n");
     
-    // Solicitar CPF do funcionário
-    printf("CPF do funcionário: ");
+    printf("CPF do funcionario: ");
     fgets(nova.cpf_funcionario, sizeof(nova.cpf_funcionario), stdin);
     nova.cpf_funcionario[strcspn(nova.cpf_funcionario, "\n")] = '\0';
     
-    // Verificar se funcionário existe
-    int idx_func = buscaSequencialFuncionario(nova.cpf_funcionario);
-    if (idx_func == -1) {
-        printf("Funcionário não encontrado!\n");
+int idx_func = buscaSequencialFuncionario(nova.cpf_funcionario);
+if (idx_func == -1) {
+        printf("erro!o funcionrio nao foi encontrado\n");
         return;
     }
     
-    // Solicitar placa do veículo
-    printf("Placa do veículo: ");
+    printf("digite a placa do veiculo: ");
     fgets(nova.placa_veiculo, sizeof(nova.placa_veiculo), stdin);
     nova.placa_veiculo[strcspn(nova.placa_veiculo, "\n")] = '\0';
     
-    // Verificar se veículo existe
-    int idx_veic = buscaSequencialVeiculo(nova.placa_veiculo);
+int idx_veic = buscaSequencialVeiculo(nova.placa_veiculo);
     if (idx_veic == -1) {
         printf("Veículo não encontrado!\n");
         return;
     }
     
-    // Verificar se veículo já está em locação ativa
     for (int i = 0; i < totalLocacoes; i++) {
         if (strcmp(locacoes[i].placa_veiculo, nova.placa_veiculo) == 0 && 
             strcmp(locacoes[i].status, "ATIVA") == 0) {
-            printf("Veículo já está em locação ativa!\n");
+            printf("o veiculo ja esta alugado!\n");
             return;
         }
     }
     
-    // Solicitar datas
-    printf("Data de início (DD/MM/AAAA): ");
+    printf("data do inicio do aluguel: ");
     fgets(nova.data_inicio, sizeof(nova.data_inicio), stdin);
     nova.data_inicio[strcspn(nova.data_inicio, "\n")] = '\0';
     
-    printf("Data de fim (DD/MM/AAAA): ");
+    printf("data do termino do aluguel: ");
     fgets(nova.data_fim, sizeof(nova.data_fim), stdin);
     nova.data_fim[strcspn(nova.data_fim, "\n")] = '\0';
     
@@ -86,17 +80,17 @@ void criarLocacao() {
     
     locacoes[totalLocacoes++] = nova;
     salvarLocacoes();
-    printf("Locação criada com sucesso!\n");
+    printf("excelente! locação criada com sucesso!\n");
 }
 
 void finalizarLocacao() {
     char cpf[15], placa[10];
-    printf("\n--- Finalizar Locação ---\n");
-    printf("CPF do funcionário: ");
+    printf("\nfinalizar locacao\n");
+    printf("CPF do funcionario: ");
     fgets(cpf, sizeof(cpf), stdin);
     cpf[strcspn(cpf, "\n")] = '\0';
     
-    printf("Placa do veículo: ");
+    printf("placa do veículo: ");
     fgets(placa, sizeof(placa), stdin);
     placa[strcspn(placa, "\n")] = '\0';
     
@@ -106,16 +100,16 @@ void finalizarLocacao() {
             strcmp(locacoes[i].status, "ATIVA") == 0) {
             strcpy(locacoes[i].status, "FINALIZADA");
             salvarLocacoes();
-            printf("Locação finalizada com sucesso!\n");
+            printf("locação finalizada com sucesso!\n");
             return;
         }
     }
-    printf("Locação ativa não encontrada!\n");
+    printf("locacao nao encontrada.\n");
 }
 
 void cancelarLocacao() {
     char cpf[15], placa[10];
-    printf("\n--- Cancelar Locação ---\n");
+    printf("\ncancelar\n");
     printf("CPF do funcionário: ");
     fgets(cpf, sizeof(cpf), stdin);
     cpf[strcspn(cpf, "\n")] = '\0';
@@ -264,7 +258,7 @@ void ordenarLocacoesPorData() {
     Locacao *arr = malloc(n * sizeof(Locacao));
     fread(arr, sizeof(Locacao), n, file);
     
-    // Bubble Sort por data de início
+    // ordenando a data inicio c bubble sort
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if (strcmp(arr[j].data_inicio, arr[j+1].data_inicio) > 0) {
